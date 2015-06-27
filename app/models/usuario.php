@@ -4,6 +4,8 @@ class Usuario extends Eloquent { // Todos los modelos deben extender la clase El
 
 	protected $table = 'usuarios';
 
+	protected $fillable = array('nombre', 'apellido');
+
 }
 
 /* End of file usuario.php */
