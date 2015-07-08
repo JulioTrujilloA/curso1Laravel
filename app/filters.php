@@ -11,6 +11,18 @@
 |
 */
 
+	Route::filter('cumpleanos', function ()
+	{
+		if (true) {
+			return View::make('cumpleanos');
+		}
+	});
+
+// Route::filter('cumpleanos',function ($ruta, $peticion, $primera, $segunda, $tercera)
+// {
+// 	return "{$primera} - {$segunda} - {$tercera}";
+// });
+
 App::before(function($request)
 {
 	//

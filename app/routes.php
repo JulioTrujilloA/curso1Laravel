@@ -10,9 +10,55 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+
 Route::get('/',function()
 {
-	return Redirect::to('usuarios');
+	return View::make('home');
+});
+
+Route::get('/url/actual',function ()
+{
+	return URL::current(). '   '.URL::full();
+});
+
+Route::filter('cumpleanos', 'filtroCumpleanos');
+
+// Route::get('/', array(
+// 	'before'=>'cumpleanos',
+// 	function ()
+// 	{
+// 		return View::make('hello');
+// 	}
+// ));
+
+Route::get('example', function ()
+{
+	return View::make('ejemplo');
+});
+
+Route::get('mi/pagina',function ()
+{
+	return '¡Hola mundo!';
+});
+
+Route::get('nuestra/respuesta', function ()
+{
+	$response = Response::make('Bond, Julio Bond.', 200);
+	$response->setTtl(60);
+	return $response;
+});
+
+Route::get('respuesta/personalizada', function()
+{
+	$response = Response::make('¡Hola mundo!', 200);
+	$response->headers->set('nuestra clave', 'nuestro valor');
+	return $response;
+});
+
+Route::get('respuesta/markdown',function(){
+	$response = Response::make('***Algo de texto en negrita***',200);
+	$response->headers->set('Content-Type', 'text/x-markdown');
+	return $response;
 });
 
 Route::get('usuarios', array('uses' => 'UsuariosController@mostrarUsuarios'));
@@ -28,8 +74,3 @@ Route::get('usuarios/{id}', array('uses'=>'UsuariosController@verUsuario'));
 // este parámetro es pasado al controlador, podemos colocar todos los parámetros que necesitemos
 // solo hay que tomar en cuenta que los parámetros van entre llaves {}
 // si el parámetro es opcional se colocar un signo de interrogación {parámetro?}
-
-// Route::get('/', function()
-// {
-// 	return View::make('hello');
-// });
